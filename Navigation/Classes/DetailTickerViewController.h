@@ -14,14 +14,17 @@
 @interface DetailTickerViewController : UIViewController 
 {
     TickerItem * tickerItem;
+    BOOL tickerInWatchlist;
 }
 @property (weak, nonatomic) IBOutlet UILabel *tickerTitle;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIButton *watchlistButton;
 @property (strong, nonatomic) DetailTickerGraphViewController * graphViewController;
 @property (weak, nonatomic) IBOutlet UIView *graphView;
 @property (weak, nonatomic) IBOutlet UIButton *EPSButton;
 @property (weak, nonatomic) IBOutlet UIButton *REVButton;
 @property (weak, nonatomic) IBOutlet UIView *AllEstimatesView;
+- (IBAction)addToWatchlist:(id)sender;
 
 
 @property (weak, nonatomic) IBOutlet UIButton *forwardQuarterButton;

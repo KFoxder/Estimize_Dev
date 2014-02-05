@@ -25,13 +25,12 @@ NSString * const WATCHLIST_CELL_NIB = @"WatchlistCell";
 @end
 
 @implementation WatchlistViewController
-@synthesize cellMain;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id) init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    self = [super init];
+    if(self){
+        
     }
     return self;
 }
@@ -40,14 +39,24 @@ NSString * const WATCHLIST_CELL_NIB = @"WatchlistCell";
 {
     [super viewDidLoad];
     
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:(243.0f/255.0f) green:(243.0f/255.0f) blue:(243.0f/255.0f) alpha:1.0f]];
+    
+    [self setupWatchlistTableView];
+
+    
+    
+}
+
+-(void) setupWatchlistTableView
+{
     UINib *nib = [UINib nibWithNibName:@"WatchlistCell" bundle:nil];
+    CGRect frameInset = CGRectInset(self.view.frame, 15, 15);
+    self.watchlistTableView = [[UITableView alloc] initWithFrame:frameInset style:UITableViewStylePlain];
+    [self.watchlistTableView setDataSource:self];
+    [self.watchlistTableView setDelegate:self];
     [self.watchlistTableView registerNib:nib forCellReuseIdentifier:@"WatchlistCell"];
-    
-    
-    //Insert fake data for development 
-    //[self fakeData];
-    
-    
+    [self.view addSubview:self.watchlistTableView];
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -56,39 +65,6 @@ NSString * const WATCHLIST_CELL_NIB = @"WatchlistCell";
     [self.watchlistTableView reloadData];
 }
 
-- (void) fakeData
-{
-
-    
-    TickerItemStore * tickerStore = [TickerItemStore defaultStore];
-    TickerItem * ticker1 = [tickerStore createItem];
-    [ticker1 setSymbol:@"AAPL"];
-    [ticker1 setFullName:@"Apple Inc. "];
-    TickerItem * ticker2 = [tickerStore createItem];
-    [ticker2 setSymbol:@"GS"];
-    [ticker2 setFullName:@"Goldman Sachs Inc."];
-    TickerItem * ticker3 = [tickerStore createItem];
-    [ticker3 setSymbol:@"LVS"];
-    [ticker3 setFullName:@"Las Vegas Sands Corp."];
-    
-    [tickerStore saveChanges];
-
-    WatchlistItemStore * watchlistStore = [WatchlistItemStore defaultStore];
-    WatchlistItem * item1 = [watchlistStore createItem];
-    [item1 setTicker:@"AAPL"];
-    [item1 setTickerName:@"Apple Inc."];
-    [item1 setTickerObject:ticker1];
-    WatchlistItem * item2 = [watchlistStore createItem];
-    [item2 setTicker:@"GS"];
-    [item2 setTickerName:@"Goldman Sachs Inc."];
-    [item2 setTickerObject:ticker2];
-    
-    [watchlistStore saveChanges];
-    
-    
-    [self.watchlistTableView reloadData];
-    
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -134,7 +110,7 @@ NSString * const WATCHLIST_CELL_NIB = @"WatchlistCell";
     
     [cell.fullNameLabel setText:tickerName];
     [cell.symbolLabel setText:ticker];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     return cell;
     

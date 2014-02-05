@@ -15,38 +15,69 @@
 @end
 
 @implementation TickerItem
+@synthesize symbol,companyName,releaseInfo;
 
-@dynamic dataLink;
-@dynamic fullName;
-@dynamic symbol;
-@dynamic releaseDates;
-
-- (void) awakeFromFetch
+-(id) initWithJSONDictionary:(NSDictionary *) dict
 {
-    [super awakeFromFetch];
+    self = [self init];
     
-    NSDate * date = [NSDate date];
-    NSArray * dates = [NSArray arrayWithObject:date];
-    
-    //Switch up dates
-    if([self.symbol isEqualToString:@"AAPL"]){
-        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-        [dateComponents setDay:-1];
-        
-        NSDate * dateTemp = [[NSCalendar currentCalendar]
-                             dateByAddingComponents:dateComponents
-                             toDate:date options:0];
-        dates = [NSArray arrayWithObject:dateTemp];
-    }else if([self.symbol isEqualToString:@"GS"]){
-        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-        [dateComponents setDay:+1];
-        
-        NSDate * dateTemp = [[NSCalendar currentCalendar]
-                             dateByAddingComponents:dateComponents
-                             toDate:date options:0];
-        dates = [NSArray arrayWithObject:dateTemp];
+    if(self){
+        symbol = [dict objectForKey:@"symbol"];
+        companyName = [dict objectForKey:@"companyName"];
+        releaseInfo = [dict objectForKey:@"releaseInfo"];
     }
-    self.releaseDates = dates;
+    return self;
+}
+
+- (NSArray *) getReleaseInfoForDate: (NSDate *) searchDate
+{
+    if(!searchDate){
+        return nil;
+    }
     
+    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:flags fromDate:searchDate];
+    NSDate * searchDateTemp = [calendar dateFromComponents:components];
+    
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yy"];
+
+    if(!releaseInfo){
+        return nil;
+    }else{
+        for(NSArray * info in releaseInfo){
+            NSString * releaseDateString = [info lastObject];
+            if(releaseDateString){
+                NSDate * releaseDate = [dateFormatter dateFromString:releaseDateString];
+                if(releaseDate){
+                    components = [calendar components:flags fromDate:releaseDate];
+                    NSDate * releaseDateTemp = [calendar dateFromComponents:components];
+                    if([releaseDateTemp isEqualToDate:searchDateTemp]){
+                        return info;
+                    }
+                }
+            }
+            
+            
+        }
+    }
+    return nil;
+}
+
+- (NSArray *) getReleaseInfoForFQ:(NSString *) FQString
+{
+    if(!releaseInfo || !FQString || [FQString isEqualToString:@""]){
+        return nil;
+    }else{
+        for(NSArray * info in releaseInfo){
+            NSString * releaseFQString = [info firstObject];
+            if([releaseFQString isEqualToString:FQString]){
+                return info;
+            }
+            
+        }
+    }
+    return nil;
 }
 @end

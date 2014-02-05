@@ -42,8 +42,8 @@
 -(void) dateChanged: (id) sender
 {
     NSDate * date = self.datePicker.date;
-    if([self.parentViewController respondsToSelector:@selector(dateChangedTo:)]){
-        [self.parentViewController performSelector:@selector(dateChangedTo:) withObject:date];
+    if([self.parentViewController respondsToSelector:@selector(dateChangedTo:Direction:)]){
+        [self.parentViewController performSelector:@selector(dateChangedTo:Direction:) withObject:date];
     }
     
 }

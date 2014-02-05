@@ -10,6 +10,8 @@
 #import "TickerItem.h"
 #import "DetailTickerGraphViewController.h"
 #import "Constants.h"
+#import "WatchlistItem.h"
+#import "WatchlistItemStore.h"
 
 
 
@@ -36,6 +38,7 @@
         
         tickerItem = ticker;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changedQuarter:) name:@"FiscalQuarterNotification" object:nil];
+        tickerInWatchlist = [[WatchlistItemStore defaultStore] tickerIsInWatchlist:ticker];
         
     
     }
@@ -56,7 +59,34 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
+- (IBAction)addToWatchlist:(id)sender {
+    WatchlistItemStore * watchlistStore = [WatchlistItemStore defaultStore];
+    TickerItem *tickerSelected = tickerItem;
+    if(!tickerInWatchlist){
+        WatchlistItem * newItem = [watchlistStore createItem];
+        [newItem setTicker:[tickerSelected symbol]];
+        [newItem setTickerName:[tickerSelected companyName]];
+        [newItem setTickerObject:tickerSelected];
+        [watchlistStore saveChanges];
+        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Watchlist"
+                                                           message:@"Ticker Added to Watchlist!"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [theAlert show];
+        tickerInWatchlist = YES;
+        [self.watchlistButton setEnabled:NO];
+        
+    }else{
+        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Watchlist Alert"
+                                                           message:@"Did not add ticker to Watchlist because Ticker is already in Watchlist."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [theAlert show];
+    }
 
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -74,15 +104,23 @@
     [AllEstimatesView setNeedsDisplay];
     
     [self setupGraph];
+    [self setupButtons];
+    
     
 }
+
 
 -(void) viewDidAppear:(BOOL)animated
 {
     [self setupLabel];
     
 }
-
+-(void) setupButtons
+{
+    if(tickerInWatchlist){
+        [self.watchlistButton setEnabled:NO];
+    }
+}
 - (void) setupLabel
 {
     NSString * quarterSelected = self.graphViewController.quarterSelected;
@@ -274,5 +312,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

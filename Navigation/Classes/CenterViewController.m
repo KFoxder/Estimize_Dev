@@ -19,6 +19,7 @@ NSString * const PROFILE_LINK = @"Profile";
 #import "WatchlistViewController.h"
 #import "LeftPanelItem.h"
 #import "CalendarViewController.h"
+#import "EstimatesViewController.h"
 
 
 @interface CenterViewController ()
@@ -38,6 +39,7 @@ NSString * const PROFILE_LINK = @"Profile";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self switchToCalendarView];
 
 }
 
@@ -125,7 +127,7 @@ NSString * const PROFILE_LINK = @"Profile";
         }else if([link isEqual:HOME_LINK]){
             
         }else if([link isEqual:ESTIMATES_LINK]){
-            
+            [self switchToEstimatesView];
         }else if([link isEqual:RANKINGS_LINK]){
             
         }else if([link isEqual:CALENDAR_LINK]){
@@ -147,7 +149,7 @@ NSString * const PROFILE_LINK = @"Profile";
     if (mainViewController == nil)
     {
         // this is where you define the view for the WatchListView
-        self.mainViewController = [[WatchlistViewController alloc] initWithNibName:@"WatchlistViewController" bundle:nil];
+        self.mainViewController = [[WatchlistViewController alloc] init];
         // self.centerViewController.view.tag = LEFT_PANEL_TAG;
         //self.centerViewController.delegate = _centerViewController;
         
@@ -199,6 +201,28 @@ NSString * const PROFILE_LINK = @"Profile";
     
     
 }
+//Returns Watchlsit view but also sets view and viewController
+- (UIView *) getCalendarView
+{
+    // init view if it doesn't already exist
+    if (mainViewController == nil)
+    {
+        // this is where you define the view for the WatchListView
+        self.mainViewController = [[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil];
+        
+        [self.centerView addSubview:self.mainViewController.view];
+        [self addChildViewController:mainViewController];
+        [mainViewController didMoveToParentViewController:self];
+        
+        mainViewController.view.frame = CGRectMake(0, 0, self.centerView.frame.size.width, self.centerView.frame.size.height);
+    }
+    
+    
+    
+    UIView *view = self.mainViewController.view;
+    return view;
+    
+}
 #pragma mark Switch to Calendar View
 - (void) switchToCalendarView
 {
@@ -224,7 +248,7 @@ NSString * const PROFILE_LINK = @"Profile";
         
         //Change top label of nav bar to Watchlst
         UILabel * title = (UILabel *) [self.view viewWithTag:2];
-        [title setText:CALENDAR_LINK];
+        [title setText:@"Earnings Calendar"];
         
         //Change the right button action based on view being shown
         [self changeRightButtonAction];
@@ -236,13 +260,13 @@ NSString * const PROFILE_LINK = @"Profile";
 }
 
 //Returns Watchlsit view but also sets view and viewController
-- (UIView *) getCalendarView
+- (UIView *) getEstimatesView
 {
     // init view if it doesn't already exist
     if (mainViewController == nil)
     {
         // this is where you define the view for the WatchListView
-        self.mainViewController = [[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil];
+        self.mainViewController = [[EstimatesViewController alloc] initWithNibName:@"EstimatesViewController" bundle:nil];
         
         [self.centerView addSubview:self.mainViewController.view];
         [self addChildViewController:mainViewController];
@@ -257,6 +281,42 @@ NSString * const PROFILE_LINK = @"Profile";
     return view;
     
 }
+#pragma mark Switch to Calendar View
+- (void) switchToEstimatesView
+{
+    //check if a view is being shown already remove it
+    if(self.showingView){
+        NSLog(@"Removed view before showing");
+        [self.mainViewController.view removeFromSuperview];
+        [self.mainViewController removeFromParentViewController];
+        self.mainViewController = nil;
+        self.showingView = NO;
+        
+        //Removes rigth button actions if any are set
+        [self.rightButton removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    
+    //Check if getWatchListView returns a view and set flag True
+    UIView *childView = [self getEstimatesView];
+    
+    if(childView){
+        //Set showingView to True
+        self.showingView = YES;
+        
+        //Change top label of nav bar to Watchlst
+        UILabel * title = (UILabel *) [self.view viewWithTag:2];
+        [title setText:@"Recent Estimates"];
+        
+        //Change the right button action based on view being shown
+        [self changeRightButtonAction];
+        
+        [self.view setNeedsDisplay];
+    }
+    
+    
+}
+
 
 
 
@@ -269,9 +329,9 @@ NSString * const PROFILE_LINK = @"Profile";
     // Check what view is being shown in center view container to see what action the right
     // button should have.
     //
-    if([mainViewController.nibName isEqualToString:@"WatchlistViewController"]){
+    if([mainViewController isKindOfClass:[WatchlistViewController class]]){
         
-        if([mainViewController respondsToSelector:@selector(presentDatePicker)]){
+        if([mainViewController respondsToSelector:@selector(newWatchlistItem:)]){
             //Set Right button Target to add new Watchlist Item if selected
             [self.rightButton setBackgroundImage:[UIImage imageNamed:@"create_post_icon.png"] forState:UIControlStateNormal];
             [self.rightButton addTarget:mainViewController action:@selector(newWatchlistItem:) forControlEvents:UIControlEventTouchUpInside];

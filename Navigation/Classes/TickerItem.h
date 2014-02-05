@@ -7,14 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 
-@interface TickerItem : NSManagedObject
+@interface TickerItem : NSObject
 
-@property (nonatomic, retain) NSString * dataLink;
-@property (nonatomic, retain) NSString * fullName;
+@property (nonatomic, retain) NSString * companyName;
 @property (nonatomic, retain) NSString * symbol;
-@property (nonatomic, retain) NSArray * releaseDates;
+@property (nonatomic, retain) NSArray * releaseInfo;
+
+-(id) initWithJSONDictionary:(NSDictionary *) dict;
+
+- (NSArray *) getReleaseInfoForDate: (NSDate *) searchDate;
+- (NSArray *) getReleaseInfoForFQ:(NSString *) FQString;
 
 @end

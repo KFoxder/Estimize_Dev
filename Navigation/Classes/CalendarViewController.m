@@ -21,17 +21,19 @@
 
 @property (nonatomic,strong) UITableView * calendarTableView;
 @property (nonatomic,strong) NSArray * tickersForCurrentDate;
+@property (nonatomic) BOOL datePickerShowing;
 
 @end
 
 @implementation CalendarViewController
-@synthesize leftButton,rightButton,calendarMainView,dateLabel;
+@synthesize leftButton,rightButton,calendarMainView,dateLabel,currentDate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.datePickerShowing = NO;
     }
     return self;
 }
@@ -54,8 +56,11 @@
     self.calendarTableView = [[UITableView alloc] init];
     [self.calendarTableView setDelegate:self];
     [self.calendarTableView setDataSource:self];
-    [self.calendarTableView setFrame:[[UIScreen mainScreen] bounds]];
+    CGRect  frame = [[UIScreen mainScreen] bounds];
+    CGRect  frameInset = CGRectInset(frame, 15, 15);
+    [self.calendarTableView setFrame:frameInset];
     [self.calendarTableView registerNib:nib forCellReuseIdentifier:@"CalendarCell"];
+    
     [self.calendarMainView addSubview:self.calendarTableView];
     
     
@@ -75,8 +80,8 @@
 }
 -(void) presentDatePicker: (id) sender
 {
-    if([sender isKindOfClass:[UIButton class]]){
-        [sender setEnabled:NO];
+    if(self.datePickerShowing){
+        return;
     }
     CalendarDatePickerViewController * datePickerVC = [[CalendarDatePickerViewController alloc] init];
     [datePickerVC.view setFrame:CGRectMake(0, 900, datePickerVC.view.frame.size.width, datePickerVC.view.frame.size.height)];
@@ -94,12 +99,50 @@
 }
 - (void) setupDateLabel
 {
-    if(!self.currentDate){
-        self.currentDate = [NSDate date];
+    if(!currentDate){
+        currentDate = [NSDate date];
     }
-    [self.dateLabel setText:[self getDateString:self.currentDate]];
+    [self.dateLabel setText:[self getDateString:currentDate]];
     [self.view setNeedsDisplay];
     
+}
+- (void) changeDateLabel:(double) direction
+{
+    if(!currentDate){
+        currentDate = [NSDate date];
+    }
+    if(direction == 1){
+        [UIView animateWithDuration:0.3f animations:^(void){
+            [self.dateLabel setFrame:CGRectMake((dateLabel.frame.origin.x + 240), dateLabel.frame.origin.y, dateLabel.frame.size.width, dateLabel.frame.size.height)];
+        }completion:^(BOOL finished){
+            [self.dateLabel setText:[self getDateString:currentDate]];
+            [self.view setNeedsDisplay];
+            [self.dateLabel setFrame:CGRectMake((dateLabel.frame.origin.x - 480), dateLabel.frame.origin.y, dateLabel.frame.size.width, dateLabel.frame.size.height)];
+            [self resetDateLabelPosition];
+        }];
+    }else if(direction == 2){
+        [UIView animateWithDuration:0.3f animations:^(void){
+            [self.dateLabel setFrame:CGRectMake((dateLabel.frame.origin.x - 240), dateLabel.frame.origin.y, dateLabel.frame.size.width, dateLabel.frame.size.height)];
+        }completion:^(BOOL finished){
+            [self.dateLabel setText:[self getDateString:currentDate]];
+            [self.view setNeedsDisplay];
+            [self.dateLabel setFrame:CGRectMake((dateLabel.frame.origin.x + 480), dateLabel.frame.origin.y, dateLabel.frame.size.width, dateLabel.frame.size.height)];
+            [self resetDateLabelPosition];
+            
+        }];
+
+    }else{
+        
+    }
+    
+}
+-(void) resetDateLabelPosition
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:nil animations:^(void){
+        [self.dateLabel setFrame:CGRectMake(65, dateLabel.frame.origin.y, dateLabel.frame.size.width, dateLabel.frame.size.height)];
+    }completion:^(BOOL finished){
+        
+    }];
 }
 
 - (NSString *) getDateString: (NSDate *) date
@@ -121,7 +164,7 @@
     NSDate * lastDate = [[NSCalendar currentCalendar]
                          dateByAddingComponents:dateComponents
                          toDate:self.currentDate options:0];
-    [self dateChangedTo:lastDate];
+    [self dateChangedTo:lastDate Direction:1];
 
     
 }
@@ -133,14 +176,17 @@
     NSDate * nextDate = [[NSCalendar currentCalendar]
                          dateByAddingComponents:dateComponents
                          toDate:self.currentDate options:0];
-    [self dateChangedTo:nextDate];
+    [self dateChangedTo:nextDate Direction:2];
 }
 
-- (void) dateChangedTo: (NSDate *) date
+- (void) dateChangedTo: (NSDate *) date Direction: (double) direction
 {
-    if(date){
+    if(date && direction){
+        if(direction != 1 && direction!=2){
+            direction = 1;
+        }
         self.currentDate = date;
-        [self setupDateLabel];
+        [self changeDateLabel:direction];
         [self.calendarTableView reloadData];
         
     }
@@ -151,6 +197,7 @@
     [self.leftButton setEnabled:YES];
     [self.rightButton setEnabled:YES];
     [[self.dateLabel.gestureRecognizers objectAtIndex:0] setEnabled:YES];
+    self.datePickerShowing = NO;
 }
 - (void) disableTopButtons
 {
@@ -158,6 +205,7 @@
     [self.leftButton setEnabled:NO];
     [self.rightButton setEnabled:NO];
     [[self.dateLabel.gestureRecognizers objectAtIndex:0] setEnabled:NO];
+    self.datePickerShowing = YES;
 }
 
 
@@ -198,7 +246,12 @@
 
     TickerItem * ticker = [self.tickersForCurrentDate objectAtIndex:indexPath.row];
     [cell.symbolLabel setText:[ticker symbol]];
-    [cell.fullNameLabel setText:[ticker fullName]];
+    [cell.fullNameLabel setText:[ticker companyName]];
+    NSArray * recentFQInfo = [ticker getReleaseInfoForDate:self.currentDate];
+    NSString * recentFQString = [recentFQInfo firstObject];
+    NSLog(@"%@",recentFQString);
+    NSLog(@"%@",recentFQInfo);
+    [cell.QuarterLabel setText:recentFQString];
     [cell setCellHeight:cell.frame.size.height];
     return cell;
 }
@@ -245,16 +298,22 @@
             if(!tickerInWatchlist){
                 WatchlistItem * newItem = [watchlistStore createItem];
                 [newItem setTicker:[tickerSelected symbol]];
-                [newItem setTickerName:[tickerSelected fullName]];
+                [newItem setTickerName:[tickerSelected companyName]];
                 [newItem setTickerObject:tickerSelected];
                 [watchlistStore saveChanges];
-                
-                [cell hideUtilityButtonsAnimated:YES];
-            }else{
-                UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Add Ticker"
-                                                                   message:@"Ticker is already in Watchlist"
+                UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Watchlist"
+                                                                   message:@"Ticker Added to Watchlist!"
                                                                   delegate:self
-                                                         cancelButtonTitle:@"Back"
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+                [theAlert show];
+                [cell hideUtilityButtonsAnimated:YES];
+                
+            }else{
+                UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Watchlist Alert"
+                                                                   message:@"Did not add ticker to Watchlist because Ticker is already in Watchlist."
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"OK"
                                                          otherButtonTitles:nil];
                 [theAlert show];
                 [cell hideUtilityButtonsAnimated:YES];

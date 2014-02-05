@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="TickerItem" representedClassName="TickerItem" syncable="YES">
         <attribute name="dataLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="releaseDateFQs" optional="YES" transient="YES" syncable="YES"/>
         <attribute name="releaseDates" optional="YES" transient="YES" syncable="YES"/>
         <attribute name="symbol" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -14,7 +15,7 @@
         <attribute name="tickerObject" transient="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TickerItem" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="WatchlistItem" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="TickerItem" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="WatchlistItem" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

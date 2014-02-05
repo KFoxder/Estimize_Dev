@@ -8,6 +8,7 @@
 
 #import "TickerItemStore.h"
 #import "TickerItem.h"
+#import "TickerJSONLoader.h"
 
 @implementation TickerItemStore
 
@@ -27,36 +28,8 @@
     self = [super init];
     
     if(self){
-        
-        //Read in Watchlist.xcdatamodeld
-        model = [NSManagedObjectModel mergedModelFromBundles:nil];
-        
-        NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-        
-        //Get our file path to store SQLite file
-        NSString * path = [self itemArchivePath];
-        
-        NSURL *storeURL = [NSURL fileURLWithPath:path];
-        
-        NSError *error = nil;
-        
-        BOOL success = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
-        
-        if(!success){
-            [NSException raise:@"Open Ticker Store failed" format:@"Reason : %@", [error localizedDescription]];
-        }
-        
-        //Create the managed object context
-        context = [[NSManagedObjectContext alloc] init];
-        [context setPersistentStoreCoordinator:psc];
-        
-        //The managed object context can manage undo, but we don't need it
-        [context setUndoManager:nil];
-        
-        
-        
-        
-        //call loadAllItems method
+        url = [NSURL URLWithString:@"https://gist.github.com/KFoxder/8744014/raw/1d3b8ac1236728abfc62fe18a1ce13701f0a4b2c/Tickers.json"];
+               //call loadAllItems method
         [self loadAllItems];
         
         
@@ -77,18 +50,27 @@
     NSDateComponents* components = [calendar components:flags fromDate:date];
     NSDate * dateTemp = [calendar dateFromComponents:components];
     
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yy"];
     
     NSMutableArray * tickers = [[NSMutableArray alloc] init];
     NSArray * allTickers = [self allItems];
     //iterate through all TickerItems
     for(TickerItem * ticker in allTickers){
-        NSArray * releaseDates = [ticker releaseDates];
-        for(NSDate * tickerDate in releaseDates){
-            components = [calendar components:flags fromDate:tickerDate];
-            NSDate * tickerDateTemp = [calendar dateFromComponents:components];
-            if([tickerDateTemp isEqualToDate:dateTemp]){
-                [tickers addObject:ticker];
+        NSArray * releaseDates = [ticker releaseInfo];
+        for(NSArray * tickerInfo in releaseDates){
+            NSString * dateString = [tickerInfo lastObject];
+            NSLog(@"%@",dateString);
+            NSDate * tickerDate = [dateFormatter dateFromString:dateString];
+            if(tickerDate){
+                NSLog(@"COnvert Date Succesful");
+                components = [calendar components:flags fromDate:tickerDate];
+                NSDate * tickerDateTemp = [calendar dateFromComponents:components];
+                if([tickerDateTemp isEqualToDate:dateTemp]){
+                    [tickers addObject:ticker];
+                }
             }
+            
         }
         
     }
@@ -127,51 +109,14 @@
 }
 
 
-- (TickerItem *) createItem
-{
-    
-    TickerItem * item = [NSEntityDescription insertNewObjectForEntityForName:@"TickerItem" inManagedObjectContext:context];
-    
-    [allItems addObject:item];
-    
-    return item;
-}
--(BOOL) removeItem: (TickerItem *) itemToRemove
-{
-    NSArray * items = [self allItems];
-    if(items && itemToRemove){
-        if(items.count!=0){
-            
-            for(int x = 0;x<items.count;x++){
-                
-            }
-            
-            
-        }
-        
-    }
-    return YES;
-}
-
 - (void) loadAllItems
 {
     if(!allItems){
-        NSLog(@"Loading all Ticker Items");
-        NSFetchRequest * request = [[NSFetchRequest alloc] init];
-        
-        NSEntityDescription *e = [[model entitiesByName] objectForKey:@"TickerItem"];
-        [request setEntity:e];
-        
-        //Sort the way watchlist items are loaded
-        // NSSortDescriptor * sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"orderValue" ascending:YES];
-        //[request setSortDescriptors:sortDesc];
-        
-        NSError *error;
-        NSArray *result = [context executeFetchRequest:request error:&error];
-        if(!result){
-            [NSException raise:@"Method (loadAllItems) failed" format:@"Reason : %@",[error localizedDescription]];
+        TickerJSONLoader * loader = [[TickerJSONLoader alloc] init];
+        NSArray * tickers = [loader tickersFromJSONFile:url];
+        if(tickers){
+            allItems = [NSMutableArray arrayWithArray:tickers];
         }
-        allItems = [[NSMutableArray alloc] initWithArray:result];
     }
 }
 
@@ -180,22 +125,6 @@
     return allItems;
 }
 
--(BOOL) saveChanges
-{
-    NSError *err = nil;
-    BOOL success = [context save:&err];
-    if(!success){
-        NSLog(@"Error Saving Watchlist file : %@", [err localizedDescription]);
-    }
-    return success;
-}
 
-
-- (NSString *) itemArchivePath
-{
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [documentDirectories objectAtIndex:0];
-    return [documentDirectory stringByAppendingPathComponent:@"tickerlist.data"];
-}
 
 @end

@@ -30,6 +30,14 @@
 		04CD2D8E16AB8194003963A9 /* LeftPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CD2D8B16AB8193003963A9 /* LeftPanelViewController.m */; };
 		1206ACD618919BB80057A9FE /* calendar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206ACD518919BB80057A9FE /* calendar_icon.png */; };
 		1206ACD818919C390057A9FE /* sector_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206ACD718919C390057A9FE /* sector_icon.png */; };
+		121602C5189C225C004EB55B /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 121602C3189C225C004EB55B /* EstimatesViewController.m */; };
+		121602C6189C225C004EB55B /* EstimatesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 121602C4189C225C004EB55B /* EstimatesViewController.xib */; };
+		121602C8189C22ED004EB55B /* EstimatesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 121602C7189C22ED004EB55B /* EstimatesCell.xib */; };
+		121602CB189C2318004EB55B /* EstimatesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 121602CA189C2318004EB55B /* EstimatesCell.m */; };
+		121602D4189C35D5004EB55B /* EstimateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 121602D3189C35D5004EB55B /* EstimateItem.m */; };
+		121602D7189C57F3004EB55B /* TickerJSONLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 121602D6189C57F3004EB55B /* TickerJSONLoader.m */; };
+		121602DA189C680D004EB55B /* EstimatesStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 121602D9189C680D004EB55B /* EstimatesStore.m */; };
+		121602DD189C681F004EB55B /* EstimatesJSONLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 121602DC189C681F004EB55B /* EstimatesJSONLoader.m */; };
 		124B3D5D1891AFEF000064D0 /* DetailTickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 124B3D5B1891AFEF000064D0 /* DetailTickerViewController.m */; };
 		124B3D5E1891AFEF000064D0 /* DetailTickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 124B3D5C1891AFEF000064D0 /* DetailTickerViewController.xib */; };
 		124BCE5D189716E800B144DE /* greyButtonHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 124BCE5C189716E800B144DE /* greyButtonHighlight.png */; };
@@ -83,7 +91,6 @@
 		12B925BC1890558500AF8396 /* gear_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B925BB1890558500AF8396 /* gear_icon.png */; };
 		12B925C0189057A000AF8396 /* flag_icon_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B925BF189057A000AF8396 /* flag_icon_3.png */; };
 		12B925C518905A5500AF8396 /* WatchlistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B925C318905A5500AF8396 /* WatchlistViewController.m */; };
-		12B925C618905A5500AF8396 /* WatchlistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12B925C418905A5500AF8396 /* WatchlistViewController.xib */; };
 		12ECE1081899BB0400EA2FA2 /* Watchlist_Icon_Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 12ECE1071899BB0400EA2FA2 /* Watchlist_Icon_Blue.png */; };
 		12ECE10A1899BBFF00EA2FA2 /* Watchlist_Icon_White.png in Resources */ = {isa = PBXBuildFile; fileRef = 12ECE1091899BBFF00EA2FA2 /* Watchlist_Icon_White.png */; };
 		12ECE10C1899BFA300EA2FA2 /* calendar_icon_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 12ECE10B1899BFA300EA2FA2 /* calendar_icon_white.png */; };
@@ -134,6 +141,20 @@
 		04CD2D8B16AB8193003963A9 /* LeftPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftPanelViewController.m; sourceTree = "<group>"; };
 		1206ACD518919BB80057A9FE /* calendar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar_icon.png; sourceTree = "<group>"; };
 		1206ACD718919C390057A9FE /* sector_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sector_icon.png; sourceTree = "<group>"; };
+		121602C2189C225C004EB55B /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
+		121602C3189C225C004EB55B /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
+		121602C4189C225C004EB55B /* EstimatesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EstimatesViewController.xib; sourceTree = "<group>"; };
+		121602C7189C22ED004EB55B /* EstimatesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EstimatesCell.xib; sourceTree = "<group>"; };
+		121602C9189C2318004EB55B /* EstimatesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesCell.h; sourceTree = "<group>"; };
+		121602CA189C2318004EB55B /* EstimatesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesCell.m; sourceTree = "<group>"; };
+		121602D2189C35D5004EB55B /* EstimateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimateItem.h; sourceTree = "<group>"; };
+		121602D3189C35D5004EB55B /* EstimateItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimateItem.m; sourceTree = "<group>"; };
+		121602D5189C57F3004EB55B /* TickerJSONLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TickerJSONLoader.h; sourceTree = "<group>"; };
+		121602D6189C57F3004EB55B /* TickerJSONLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TickerJSONLoader.m; sourceTree = "<group>"; };
+		121602D8189C680D004EB55B /* EstimatesStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesStore.h; sourceTree = "<group>"; };
+		121602D9189C680D004EB55B /* EstimatesStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesStore.m; sourceTree = "<group>"; };
+		121602DB189C681F004EB55B /* EstimatesJSONLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesJSONLoader.h; sourceTree = "<group>"; };
+		121602DC189C681F004EB55B /* EstimatesJSONLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesJSONLoader.m; sourceTree = "<group>"; };
 		124B3D5A1891AFEF000064D0 /* DetailTickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTickerViewController.h; sourceTree = "<group>"; };
 		124B3D5B1891AFEF000064D0 /* DetailTickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTickerViewController.m; sourceTree = "<group>"; };
 		124B3D5C1891AFEF000064D0 /* DetailTickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTickerViewController.xib; sourceTree = "<group>"; };
@@ -277,7 +298,6 @@
 		12B925BF189057A000AF8396 /* flag_icon_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag_icon_3.png; sourceTree = "<group>"; };
 		12B925C218905A5500AF8396 /* WatchlistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchlistViewController.h; sourceTree = "<group>"; };
 		12B925C318905A5500AF8396 /* WatchlistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchlistViewController.m; sourceTree = "<group>"; };
-		12B925C418905A5500AF8396 /* WatchlistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchlistViewController.xib; sourceTree = "<group>"; };
 		12ECE1071899BB0400EA2FA2 /* Watchlist_Icon_Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Watchlist_Icon_Blue.png; sourceTree = "<group>"; };
 		12ECE1091899BBFF00EA2FA2 /* Watchlist_Icon_White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Watchlist_Icon_White.png; sourceTree = "<group>"; };
 		12ECE10B1899BFA300EA2FA2 /* calendar_icon_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar_icon_white.png; sourceTree = "<group>"; };
@@ -358,7 +378,6 @@
 		04CD2D3416AB5722003963A9 = {
 			isa = PBXGroup;
 			children = (
-				12AB6CF01895B85D001157AC /* Accelerate.framework */,
 				04CD2D4916AB5722003963A9 /* Navigation */,
 				04CD2D4216AB5722003963A9 /* Frameworks */,
 				04CD2D4016AB5722003963A9 /* Products */,
@@ -377,6 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				12AB6CEE1895B81A001157AC /* libCorePlot-CocoaTouch.a */,
+				12AB6CF01895B85D001157AC /* Accelerate.framework */,
 				1270F30D18906E0D008C2C88 /* CoreData.framework */,
 				04CD2D7616AB5D8A003963A9 /* QuartzCore.framework */,
 				04CD2D4316AB5722003963A9 /* UIKit.framework */,
@@ -432,7 +452,6 @@
 				04CD2D7316AB577B003963A9 /* CenterViewController.xib */,
 				04CD2D8316AB817F003963A9 /* LeftPanelViewController.xib */,
 				1287C7B8189313FD0031BD0D /* WatchlistItemNewViewController.xib */,
-				12B925C418905A5500AF8396 /* WatchlistViewController.xib */,
 				1270F31618907E08008C2C88 /* WatchlistCell.xib */,
 				12EE146B18985E0000C0AA1A /* CalendarCell.xib */,
 				124B3D5C1891AFEF000064D0 /* DetailTickerViewController.xib */,
@@ -442,6 +461,8 @@
 				04CD2D8416AB817F003963A9 /* MainCellLeft.xib */,
 				124BCE6F18981D8E00B144DE /* CalendarViewController.xib */,
 				12EE145F18982B5500C0AA1A /* CalendarDatePickerViewController.xib */,
+				121602C4189C225C004EB55B /* EstimatesViewController.xib */,
+				121602C7189C22ED004EB55B /* EstimatesCell.xib */,
 			);
 			name = Views;
 			path = Classes;
@@ -467,6 +488,12 @@
 				1270F30B18906CF8008C2C88 /* WatchlistItemStore.m */,
 				1287C7B31892FDF70031BD0D /* TickerItemStore.h */,
 				1287C7B41892FDF70031BD0D /* TickerItemStore.m */,
+				121602D5189C57F3004EB55B /* TickerJSONLoader.h */,
+				121602D6189C57F3004EB55B /* TickerJSONLoader.m */,
+				121602D8189C680D004EB55B /* EstimatesStore.h */,
+				121602D9189C680D004EB55B /* EstimatesStore.m */,
+				121602DB189C681F004EB55B /* EstimatesJSONLoader.h */,
+				121602DC189C681F004EB55B /* EstimatesJSONLoader.m */,
 			);
 			name = Stores;
 			sourceTree = "<group>";
@@ -522,6 +549,8 @@
 				12EE14661898551C00C0AA1A /* WatchlistCell.m */,
 				12EE146818985DCF00C0AA1A /* CalendarCell.h */,
 				12EE146918985DD000C0AA1A /* CalendarCell.m */,
+				121602C9189C2318004EB55B /* EstimatesCell.h */,
+				121602CA189C2318004EB55B /* EstimatesCell.m */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -654,6 +683,8 @@
 				124BCE6E18981D8D00B144DE /* CalendarViewController.m */,
 				12EE145D18982B5500C0AA1A /* CalendarDatePickerViewController.h */,
 				12EE145E18982B5500C0AA1A /* CalendarDatePickerViewController.m */,
+				121602C2189C225C004EB55B /* EstimatesViewController.h */,
+				121602C3189C225C004EB55B /* EstimatesViewController.m */,
 			);
 			name = OtherViewControllers;
 			sourceTree = "<group>";
@@ -669,6 +700,8 @@
 				12B925A518903B3C00AF8396 /* LeftPanelItem.m */,
 				124BCE62189723DF00B144DE /* Constants.h */,
 				124BCE63189723DF00B144DE /* Constants.m */,
+				121602D2189C35D5004EB55B /* EstimateItem.h */,
+				121602D3189C35D5004EB55B /* EstimateItem.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -696,9 +729,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		04CD2D3E16AB5722003963A9 /* Navigation */ = {
+		04CD2D3E16AB5722003963A9 /* Estimize */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04CD2D6316AB5722003963A9 /* Build configuration list for PBXNativeTarget "Navigation" */;
+			buildConfigurationList = 04CD2D6316AB5722003963A9 /* Build configuration list for PBXNativeTarget "Estimize" */;
 			buildPhases = (
 				04CD2D3B16AB5722003963A9 /* Sources */,
 				04CD2D3C16AB5722003963A9 /* Frameworks */,
@@ -708,7 +741,7 @@
 			);
 			dependencies = (
 			);
-			name = Navigation;
+			name = Estimize;
 			productName = Navigation;
 			productReference = 04CD2D3F16AB5722003963A9 /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -721,6 +754,11 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Kevin Fox";
+				TargetAttributes = {
+					04CD2D3E16AB5722003963A9 = {
+						DevelopmentTeam = J8B6FV28WE;
+					};
+				};
 			};
 			buildConfigurationList = 04CD2D3916AB5722003963A9 /* Build configuration list for PBXProject "Estimize_dev" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -734,7 +772,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				04CD2D3E16AB5722003963A9 /* Navigation */,
+				04CD2D3E16AB5722003963A9 /* Estimize */,
 			);
 		};
 /* End PBXProject section */
@@ -767,7 +805,7 @@
 				12B925BA1890558000AF8396 /* flag_icon.png in Resources */,
 				12B925BC1890558500AF8396 /* gear_icon.png in Resources */,
 				12B925C0189057A000AF8396 /* flag_icon_3.png in Resources */,
-				12B925C618905A5500AF8396 /* WatchlistViewController.xib in Resources */,
+				121602C8189C22ED004EB55B /* EstimatesCell.xib in Resources */,
 				1270F31718907E08008C2C88 /* WatchlistCell.xib in Resources */,
 				1270F31B18918987008C2C88 /* estimizeLogoLargeV2@2x.png in Resources */,
 				1270F31D18918991008C2C88 /* estimizeLogoSmallV2@2x.png in Resources */,
@@ -803,6 +841,7 @@
 				12ECE1081899BB0400EA2FA2 /* Watchlist_Icon_Blue.png in Resources */,
 				12ECE10A1899BBFF00EA2FA2 /* Watchlist_Icon_White.png in Resources */,
 				12ECE10C1899BFA300EA2FA2 /* calendar_icon_white.png in Resources */,
+				121602C6189C225C004EB55B /* EstimatesViewController.xib in Resources */,
 				12ECE10E1899C04B00EA2FA2 /* calendar_icon_white2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -818,24 +857,30 @@
 				04CD2D5416AB5722003963A9 /* AppDelegate.m in Sources */,
 				04CD2D6A16AB574D003963A9 /* MainViewController.m in Sources */,
 				04CD2D7416AB577B003963A9 /* CenterViewController.m in Sources */,
+				121602D4189C35D5004EB55B /* EstimateItem.m in Sources */,
 				04CD2D8E16AB8194003963A9 /* LeftPanelViewController.m in Sources */,
 				12B925A618903B3D00AF8396 /* LeftPanelItem.m in Sources */,
+				121602DA189C680D004EB55B /* EstimatesStore.m in Sources */,
 				12B925C518905A5500AF8396 /* WatchlistViewController.m in Sources */,
 				1270F30C18906CF8008C2C88 /* WatchlistItemStore.m in Sources */,
 				1270F31218906E4B008C2C88 /* Estimize.xcdatamodeld in Sources */,
 				124B3D5D1891AFEF000064D0 /* DetailTickerViewController.m in Sources */,
 				1287C7AC1892F8C30031BD0D /* TickerItem.m in Sources */,
 				1287C7B21892F9C90031BD0D /* WatchlistItem.m in Sources */,
+				121602DD189C681F004EB55B /* EstimatesJSONLoader.m in Sources */,
 				1287C7B51892FDF70031BD0D /* TickerItemStore.m in Sources */,
 				1287C7B9189313FD0031BD0D /* WatchlistItemNewViewController.m in Sources */,
 				1287C7BD18935A7F0031BD0D /* CustomSearchBar.m in Sources */,
 				12AB6CF51895B954001157AC /* DetailTickerGraphViewController.m in Sources */,
+				121602CB189C2318004EB55B /* EstimatesCell.m in Sources */,
 				124BCE64189723DF00B144DE /* Constants.m in Sources */,
 				124BCE7018981D8E00B144DE /* CalendarViewController.m in Sources */,
+				121602C5189C225C004EB55B /* EstimatesViewController.m in Sources */,
 				12EE146018982B5500C0AA1A /* CalendarDatePickerViewController.m in Sources */,
 				12EE14671898551C00C0AA1A /* WatchlistCell.m in Sources */,
 				12EE146A18985DD000C0AA1A /* CalendarCell.m in Sources */,
 				12EF07F218998239002ADE19 /* NSMutableArray+SWUtilityButtons.m in Sources */,
+				121602D7189C57F3004EB55B /* TickerJSONLoader.m in Sources */,
 				12EF07F318998239002ADE19 /* SWCellScrollView.m in Sources */,
 				12EF07F418998239002ADE19 /* SWLongPressGestureRecognizer.m in Sources */,
 				12EF07F518998239002ADE19 /* SWTableViewCell.m in Sources */,
@@ -880,8 +925,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Estimize;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -901,8 +947,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = Estimize;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -911,6 +958,8 @@
 		04CD2D6416AB5722003963A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Navigation/Navigation-Prefix.pch";
 				INFOPLIST_FILE = "Navigation/Navigation-Info.plist";
@@ -924,6 +973,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -932,6 +982,8 @@
 		04CD2D6516AB5722003963A9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Navigation/Navigation-Prefix.pch";
 				INFOPLIST_FILE = "Navigation/Navigation-Info.plist";
@@ -945,6 +997,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -962,7 +1015,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		04CD2D6316AB5722003963A9 /* Build configuration list for PBXNativeTarget "Navigation" */ = {
+		04CD2D6316AB5722003963A9 /* Build configuration list for PBXNativeTarget "Estimize" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04CD2D6416AB5722003963A9 /* Debug */,

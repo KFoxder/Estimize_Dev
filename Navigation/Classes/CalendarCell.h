@@ -13,5 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *symbolLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *QuarterLabel;
+@property (weak, nonatomic) IBOutlet UILabel *releaseType;
 
 @end

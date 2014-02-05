@@ -13,6 +13,5 @@
    
 }
 
-@property (weak, nonatomic) IBOutlet UITableView *watchlistTableView;
-@property (nonatomic, weak) IBOutlet UITableViewCell *cellMain;
+@property (nonatomic,strong) UITableView *watchlistTableView;
 @end

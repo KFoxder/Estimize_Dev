@@ -22,7 +22,7 @@
     [self.window makeKeyAndVisible];
     
     //Set Status Bar Custom
-    //[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
 
     

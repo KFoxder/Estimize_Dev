@@ -94,7 +94,7 @@
             
             WatchlistItem * newItem = [watchlistStore createItem];
             [newItem setTicker:[tickerItem symbol]];
-            [newItem setTickerName:[tickerItem fullName]];
+            [newItem setTickerName:[tickerItem companyName]];
             [newItem setTickerObject:tickerItem];
             [watchlistStore saveChanges];
             
@@ -115,7 +115,7 @@
         if(!tickerInWatchlist){
             WatchlistItem * newItem = [watchlistStore createItem];
             [newItem setTicker:[tickerItem symbol]];
-            [newItem setTickerName:[tickerItem fullName]];
+            [newItem setTickerName:[tickerItem companyName]];
             [newItem setTickerObject:tickerItem];
             [watchlistStore saveChanges];
             
@@ -173,7 +173,7 @@
     NSMutableArray *searchResults = [[NSMutableArray alloc] init];
     for (TickerItem *ticker in self.tickers)
     {
-        if ([ticker.symbol isEqualToString:tickerSearch] || [ticker.fullName isEqualToString:tickerSearch])
+        if ([ticker.symbol isEqualToString:tickerSearch] || [ticker.companyName isEqualToString:tickerSearch])
         {
             [searchResults addObject:ticker];
         }
