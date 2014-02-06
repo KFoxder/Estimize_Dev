@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Kevin Fox. All rights reserved.
 //
 
+#define ESTIMATES_JSON_URL @"https://raw2.github.com/KFoxder/Estimize_Data/master/Estimates.json"
+
 #import "EstimatesStore.h"
 #import "EstimatesJSONLoader.h"
 
@@ -27,7 +29,7 @@
     self = [super init];
     
     if(self){
-        url = [NSURL URLWithString:@"https://gist.github.com/KFoxder/8745354/raw/a3ec3b02435e72bd19f14a2380f063b895427276/estimates.json"];
+        url = [NSURL URLWithString:ESTIMATES_JSON_URL];
         //call loadAllItems method
         [self loadAllItems];
         

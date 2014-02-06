@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Kevin Fox. All rights reserved.
 //
 
+#define TICKERS_JSON_URL @"https://raw2.github.com/KFoxder/Estimize_Data/master/Tickers.json"
+
 #import "TickerItemStore.h"
 #import "TickerItem.h"
 #import "TickerJSONLoader.h"
@@ -28,7 +30,7 @@
     self = [super init];
     
     if(self){
-        url = [NSURL URLWithString:@"https://gist.github.com/KFoxder/8744014/raw/1d3b8ac1236728abfc62fe18a1ce13701f0a4b2c/Tickers.json"];
+        url = [NSURL URLWithString:TICKERS_JSON_URL];
                //call loadAllItems method
         [self loadAllItems];
         
